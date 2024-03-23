@@ -28,11 +28,17 @@ export const kanaswap = async () => {
     outputToken:
       "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_coin::MOD",
     amountIn: "1000",
-    slippage: 0.5,
+    slippage: 0.8,
     network: NetworkId.aptos,
+    options: {
+      integratorAddress:
+        "0x9538c839fe490ccfaf32ad9f7491b5e84e610ff6edc110ff883f06ebde82463d",
+      integratorFeePercentage: 0.1,
+    },
   });
 
   const optimalQuote = quote.data[0];
+  console.log("🚀 ~ kanaswap ~ optimalQuote:", optimalQuote)
 
   const executeSwap = await swap.executeSwapInstruction({
     quote: optimalQuote,
@@ -42,4 +48,4 @@ export const kanaswap = async () => {
   console.log("hash", executeSwap);
 };
 
-kanaswap()
+kanaswap();
