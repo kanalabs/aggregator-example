@@ -40,3 +40,4 @@ export const kanaswap = async () => {
   console.log("hash", executeSwap);
 };
 
+kanaswap()
