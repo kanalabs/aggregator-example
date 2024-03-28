@@ -13,16 +13,6 @@ export const KANA_ROUTER =
 
 const aptosProvider = new AptosClient("https://api.mainnet.aptoslabs.com/v1");
 
-const swap = new SwapAggregator(Environment.production, {
-  providers: {
-    //@ts-ignore
-    aptos: aptosProvider,
-  },
-  signers: {
-    //@ts-ignore
-    aptos: aptosSigner,
-  },
-});
 
 
 /**
