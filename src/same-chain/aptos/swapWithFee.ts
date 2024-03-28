@@ -18,12 +18,14 @@ const swap = new SwapAggregator(Environment.production, {
   signers: {
     //@ts-ignore
     aptos: aptosSigner,
-  },
-});
+  }
+
+},
+);
 
 export const kanaswap = async () => {
   const quote = await swap.swapQuotes({
-    apiKey: "key", // currently not applicable you can pass any string
+    apiKey : "api-key",
     inputToken: "0x1::aptos_coin::AptosCoin",
     outputToken:
       "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_coin::MOD",
