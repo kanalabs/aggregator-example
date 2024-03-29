@@ -22,13 +22,15 @@ const aptosProvider = new AptosClient("https://api.mainnet.aptoslabs.com/v1");
 export const setIntegratorFee = async () => {
   const payload = {
     function: `${KANA_ROUTER}::KanalabsRouterV2::set_referral_swap_fee`,
-    arguments: [10] // fee bps,
+    arguments: [10], // fee bps,
+    type_arguments : []
   } as Types.EntryFunctionPayload;
 
   const transcaction = await aptosProvider.generateTransaction(
-    aptosSigner.address(),
-    payload as Types.EntryFunctionPayload
+    aptosSigner.address().toString(),
+    payload 
   );
+
   const sign = await aptosProvider.signTransaction(aptosSigner, transcaction);
   const submit = await aptosProvider.submitTransaction(sign);
   console.log(submit)
