@@ -1,38 +1,33 @@
-import { AptosAccount, AptosClient, Types } from "aptos";
-import { SwapAggregator, Environment, NetworkId } from "@kanalabs/aggregator";
+import { Account, AccountAddress, Aptos, AptosConfig, Ed25519PrivateKey, Network } from "@aptos-labs/ts-sdk";
 import "dotenv/config";
 
-const aptosSigner = AptosAccount.fromAptosAccountObject({
-  address: process.env.APTOS_ADDRESS || "",
-  publicKeyHex: process.env.APTOS_PUBLICKEY || "",
-  privateKeyHex: process.env.APTOS_PRIVATEKEY || "",
+const aptosSigner = Account.fromPrivateKey({
+  privateKey: new Ed25519PrivateKey(process.env.APTOS_PRIVATEKEY || ''),
+  address:  AccountAddress.from(process.env.APTOS_ADDRESS || ''),
+  legacy: true,
 });
+
+const aptosConfig = new AptosConfig({ network: Network.MAINNET });
+const aptos = new Aptos(aptosConfig)
 
 export const KANA_ROUTER =
   "0x9538c839fe490ccfaf32ad9f7491b5e84e610ff6edc110ff883f06ebde82463d";
-
-const aptosProvider = new AptosClient("https://api.mainnet.aptoslabs.com/v1");
-
-
 
 /**
  * 10 bps is 0.1%
  * (100 * 10) / 10000 = 1 (let 100 be the amount received , so you will 0.1 as fee)
  */
 export const setIntegratorFee = async () => {
-  const payload = {
-    function: `${KANA_ROUTER}::KanalabsRouterV2::set_referral_swap_fee`,
-    arguments: [10], // fee bps,
-    type_arguments : []
-  } as Types.EntryFunctionPayload;
-
-  const transcaction = await aptosProvider.generateTransaction(
-    aptosSigner.address().toString(),
-    payload 
-  );
-
-  const sign = await aptosProvider.signTransaction(aptosSigner, transcaction);
-  const submit = await aptosProvider.submitTransaction(sign);
+  const payload = await aptos.transaction.build.simple({
+    sender: aptosSigner.accountAddress.toString(),
+    data: {
+      function: `${KANA_ROUTER}::KanalabsRouterV2::set_referral_swap_fee`,
+      functionArguments: [10],
+      typeArguments: [],
+    },
+  });
+  const sign = await aptos.signAndSubmitTransaction({ signer: aptosSigner, transaction: payload });
+  const submit = await aptos.waitForTransaction({ transactionHash: sign.hash });
   console.log(submit)
 };
 
