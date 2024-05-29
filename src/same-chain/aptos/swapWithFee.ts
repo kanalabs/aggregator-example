@@ -1,14 +1,15 @@
-import { AptosAccount, AptosClient, Types } from "aptos";
 import { SwapAggregator, Environment, NetworkId } from "@kanalabs/aggregator";
 import "dotenv/config";
+import { Account, AccountAddress, Aptos, AptosConfig, Ed25519PrivateKey, Network } from "@aptos-labs/ts-sdk";
 
-const aptosSigner = AptosAccount.fromAptosAccountObject({
-  address: process.env.APTOS_ADDRESS || "",
-  publicKeyHex: process.env.APTOS_PUBLICKEY || "",
-  privateKeyHex: process.env.APTOS_PRIVATEKEY || "",
+const aptosSigner = Account.fromPrivateKey({
+  privateKey: new Ed25519PrivateKey(process.env.APTOS_PRIVATEKEY || ''),
+  address:  AccountAddress.from(process.env.APTOS_ADDRESS || ''),
+  legacy: true,
 });
 
-const aptosProvider = new AptosClient("https://api.mainnet.aptoslabs.com/v1");
+const aptosConfig = new AptosConfig({ network: Network.MAINNET });
+const aptosProvider = new Aptos(aptosConfig)
 
 const swap = new SwapAggregator(Environment.production, {
   providers: {
@@ -43,8 +44,9 @@ export const kanaswap = async () => {
   console.log("🚀 ~ kanaswap ~ optimalQuote:", optimalQuote)
 
   const executeSwap = await swap.executeSwapInstruction({
+    apiKey : "api-key",
     quote: optimalQuote,
-    address: aptosSigner.address().toString(),
+    address: aptosSigner.accountAddress.toString(),
   });
 
   console.log("hash", executeSwap);
