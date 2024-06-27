@@ -1,4 +1,4 @@
-import { kanaswap } from "./same-chain/aptos/swap";
+import { kanaswap } from "./same-chain/aptos/swapWith_fee_coin_in";
 import readline from "readline";
 
 export { kanaswap };
