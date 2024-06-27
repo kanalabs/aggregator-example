@@ -20,8 +20,8 @@
     "typescript": "5.0.4"
   },
   "dependencies": {
-    "@aptos-labs/ts-sdk": "1.16.0",
-    "@kanalabs/aggregator": "0.7.9-beta.1",
+    "@aptos-labs/ts-sdk": "1.13.3",
+    "@kanalabs/aggregator": "0.7.12",
     "dotenv": "16.4.5"
   }
 }
