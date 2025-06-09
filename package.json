@@ -1,8 +1,8 @@
 {
   "name": "aggregator-examples",
   "version": "1.0.0",
-  "description": "",
-  "main": "lib/index.js",
+  "description": "Sample project to showcase the usage of @kanalabs/aggregator",
+  "main": "src/same-chain/aptos/swap.ts",
   "tag": "latest",
   "files": [
     "lib",
@@ -10,18 +10,33 @@
     "index.d.ts"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "example:swap": "tsx src/same-chain/aptos/swap.ts",
+    "example:swapCore": "tsx src/same-chain/aptos/swapUsingCore.ts",
+    "example:evm-swap": "tsx src/same-chain/evm/swap.ts",
+    "example:evm-recipientswap": "tsx src/same-chain/evm/recipientSwap.ts",
+    "example:solana-swap": "tsx src/same-chain/solana/swap.ts",
+    "example:solana-recipientswap": "tsx src/same-chain/solana/recipientSwap.ts",
+    "example:aptos-arbitrum-swap": "tsx src/cross-chain/aptos-arbitrum-swap.ts",
+    "example:arbitrum-aptos-swap": "tsx src/cross-chain/arbitrum-aptos-swap.ts",
+    "example:aptos-solana-swap": "tsx src/cross-chain/aptos-solana-swap.ts",
+    "example:arbitrum-base-swap": "tsx src/cross-chain/arbitrum-base-swap.ts",
+    "example:arbitrum-solana-swap": "tsx src/cross-chain/arbitrum-solana-swap.ts",
+    "example:solana-aptos-swap": "tsx src/cross-chain/solana-aptos-swap.ts",
+    "example:solana-arbitrum-swap": "tsx src/cross-chain/solana-arbitrum-swap.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "18.6.2",
-    "typescript": "5.0.4"
+    "@types/node": "^18.6.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@aptos-labs/ts-sdk": "2.0.0",
     "@kanalabs/aggregator": "0.7.14-beta.11",
-    "dotenv": "16.4.5"
+    "@solana/web3.js": "^1.98.2",
+    "dotenv": "16.5.0",
+    "ethers": "^5.7.2"
   }
 }
