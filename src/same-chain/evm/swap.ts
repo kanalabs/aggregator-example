@@ -1,6 +1,6 @@
 import { SwapAggregator, Environment, NetworkId } from "@kanalabs/aggregator"
 import "dotenv/config"
-import { ethers, utils } from "ethers"
+import { ethers, parseEther } from "ethers"
 
 // Setup Signer
 const privateKey = process.env.EVM_PRIVATE_KEY as string
@@ -26,7 +26,7 @@ export const kanaswap = async () => {
     apiKey: "your-api-key",
     inputToken: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
     outputToken: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
-    amountIn: utils.parseEther("0.01").toString(),
+    amountIn: parseEther("0.01").toString(),
     slippage: 0.5,
     network: NetworkId.polygon,
   })

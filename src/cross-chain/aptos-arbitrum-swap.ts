@@ -21,7 +21,7 @@ const aptosSigner = Account.fromPrivateKey({
 const evmprivateKey = process.env.EVM_PRIVATE_KEY as string
 const arbitrumRpc = process.env.ETH_NODE_URI_POLYGON as string
 
-const evmProvider = ethers.getDefaultProvider(arbitrumRpc)
+const evmProvider = new ethers.JsonRpcProvider(arbitrumRpc)
 const evmSigner = new ethers.Wallet(evmprivateKey, evmProvider)
 
 // Setup Aptos provider
