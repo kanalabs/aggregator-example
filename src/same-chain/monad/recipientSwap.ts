@@ -63,7 +63,8 @@ export const kanaswap = async () => {
     const executeSwap = await swap.executeSwapInstruction({
       apiKey: process.env.KANA_API_KEY as string,
       quote: quotes.data[0],
-      address: "0x143B240C98865243fb02AD334983443CB92bb9f2",
+      address: await monadSigner.getAddress(),
+      recipient: "0x143B240C98865243fb02AD334983443CB92bb9f2",
     })
 
     console.log("✅ Transaction hash:", executeSwap)
