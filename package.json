@@ -23,7 +23,9 @@
     "example:arbitrum-solana-swap": "tsx src/cross-chain/arbitrum-solana-swap.ts",
     "example:solana-aptos-swap": "tsx src/cross-chain/solana-aptos-swap.ts",
     "example:solana-arbitrum-swap": "tsx src/cross-chain/solana-arbitrum-swap.ts",
-    "example:redeem": "tsx src/redeem/redeem.ts"
+    "example:redeem": "tsx src/redeem/redeem.ts",
+    "example:monad-swap": "tsx src/same-chain/monad/swap.ts",
+    "example:monad-recipientswap": "tsx src/same-chain/monad/recipientSwap.ts"
   },
   "keywords": [],
   "author": "",
